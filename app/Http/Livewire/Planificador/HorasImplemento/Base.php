@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Planificador\HorasImplemento;
 
 use App\Models\ComponentePorImplemento;
+use App\Models\Implemento;
 use App\Models\PiezaPorComponente;
 use App\Models\Sede;
 use App\Models\User;
@@ -32,8 +33,9 @@ class Base extends Component
 
     public function render()
     {
+        $implementos = Implemento::where('responsable',$this->operario_id)->get();
         $componentes = ComponentePorImplemento::get();
         $piezas = PiezaPorComponente::get();
-        return view('livewire.planificador.horas-implemento.base',compact('componentes','piezas'));
+        return view('livewire.planificador.horas-implemento.base',compact('implementos','componentes','piezas'));
     }
 }
